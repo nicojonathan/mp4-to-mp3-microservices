@@ -1,6 +1,6 @@
 # this tells k8s what to run and how
 
-apiversion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth # unique name for this deployment
@@ -12,23 +12,23 @@ spec:
   selector:
     matchLabels: # this tells k8s which Pods belong to this deployment
       app: auth 
-    strategy:
-      type: RollingUpdate
-      rollingUpdate:
-          maxSurge: 3
-    template: # this is the Pod template
-      metadata:
-        labels: # add label to the Pod so the deployment can track it
-          app: auth
-      spec: # Pod spec
-        containers:
-          - name: auth
-            image: nicojonathan/auth 
-            ports:
-              - containerPort: 5000
-            envFrom:
-              - configMapRef:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+  template: # this is the Pod template
+    metadata:
+      labels: # add label to the Pod so the deployment can track it
+        app: auth
+    spec: # Pod spec
+      containers:
+        - name: auth
+          image: nicojonathan/auth 
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
                 name: auth-configmap 
-              - secretRef:
+            - secretRef:
                 name: auth-secret
 
