@@ -1,0 +1,16 @@
+# this is used to expose the deployed Pods to other services or to the outside world
+
+# Stable IP and DNS name for accessing Pods
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth 
+spec:
+  selector: # Targets the Pods with specific labels
+    app: auth
+  type: ClusterIP
+  ports: # Specify which port(s) to expose and forward to the pods
+    - port: 5000
+      targetPort: 5000
+      protocol: TCP
