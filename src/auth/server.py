@@ -71,3 +71,10 @@ def createJWT(username, secret, authz):
 if __name__ == "__main__":
     server.run(host="0.0.0.0", port=5000)
     # the host is set to 0.0.0 means that this service will listen on any and all of the Docker cotainer's IP addresses that it can find.
+
+    # For the Kubernetes:
+    # This means that the Flask application is listening on all available network interfaces of the Pod.
+
+    # When the application listens on 0.0.0.0, it’s allowing connections from any network interface on the container. So, the container is not restricted to only local connections but can be accessed through any available IP (either from within the container or from the Kubernetes network).
+
+    # In Kubernetes, containers often need to be accessible from outside the container's local environment, so 0.0.0.0 makes the app listen on all interfaces.
