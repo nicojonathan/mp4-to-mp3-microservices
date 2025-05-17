@@ -1,0 +1,3 @@
+# Ignore venv in auth service
+src/auth/venv/
+src/gateway/venv/
